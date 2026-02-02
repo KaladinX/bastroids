@@ -1,23 +1,38 @@
 import pygame
+import sys
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from logger import log_state
+from player import Player
 
 def main():
-    print("Starting Asteroids with pygame version: %s" % pygame.version.ver)
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
-
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pygame.time.Clock()
+    dt = 0
 
-    while True: 
-        log_state()
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
+    player = Player(x, y)
+
+    #1. Handle Inputs (Events)
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
+                pygame.quit()
+                sys.exit()
 
-    screen.fill("black")
-    display.flip()
+        #2. Update (Game Logic)
+        player.update(dt)
+
+        #3. Draw (Rendering)
+        screen.fill("black")
+        player.draw(screen)
+        pygame.display.flip()
+
+        #4. Tick the Clock
+        dt = clock.tick(60) / 1000
+
+        log_state()
 
 if __name__ == "__main__":
     main()
