@@ -1,7 +1,8 @@
 import pygame
 import sys
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
-from logger import log_state, log_event
+import random
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, TWILIGHT_BG, DEATH_MESSAGES
+from logger import log_event
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
@@ -9,6 +10,7 @@ from shot import Shot
 
 def main():
     pygame.init()
+    pygame.display.set_caption("Bastroids")
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
@@ -34,7 +36,6 @@ def main():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
                 return
 
         #2. Update (Game Logic)
@@ -43,17 +44,17 @@ def main():
         for asteroid in asteroids:
             if asteroid.collides_with(player):
                 log_event("player_hit")
-                print("Game over!")
-                sys.exit()
+                print(random.choice(DEATH_MESSAGES))
+                return
 
-        for asteroid in asteroids:
+        for asteroid in list(asteroids):
             for shot in shots:
                 if asteroid.collides_with(shot):
                     log_event("asteroid_shot")
                     asteroid.split()
                     shot.kill()
 
-        screen.fill("black")
+        screen.fill(TWILIGHT_BG)
 
         #3. Draw (Rendering)
         for obj in drawable:
@@ -64,7 +65,7 @@ def main():
         #4. Tick the Clock
         dt = clock.tick(60) / 1000
 
-        log_state()
-
 if __name__ == "__main__":
     main()
+    pygame.quit()
+    sys.exit()

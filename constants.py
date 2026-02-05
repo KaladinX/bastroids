@@ -13,3 +13,19 @@ ASTEROID_MAX_RADIUS = ASTEROID_MIN_RADIUS * ASTEROID_KINDS
 SHOT_RADIUS = 5
 PLAYER_SHOOT_SPEED = 500
 PLAYER_SHOOT_COOLDOWN_SECONDS = 0.3
+
+TWILIGHT_BG = (20, 10, 40)
+SILVER_GLAMOUR = (200, 200, 220)
+ASTEROID_GREY = (120, 120, 140)
+
+DEATH_MESSAGES = [
+    "I'll make a game of you.",
+    "The Cthaeh laughs at your failure.",
+    "Do not mistake me for my mask.",
+    "A bad turn.",
+    "By stone and oak and elm...you are dead.",
+    "Anpauen!",
+    "That better not stain...",
+    "The Withy Windle is not in this game, yet withy windless you wander.",
+    "Ash and ember.",
+]
